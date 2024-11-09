@@ -1,0 +1,5 @@
+rootProject.name = 'flashcards'
+include 'auth'
+include 'server'
+include 'common'
+include 'db'

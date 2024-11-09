@@ -1,0 +1,73 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.3.5'
+    id 'io.spring.dependency-management' version '1.1.6'
+}
+
+group = 'pl.ztp.flashcards'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation project(':common')
+    testImplementation project(':db')
+
+    //SPRING BOOT
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    implementation 'org.springframework.boot:spring-boot-starter-amqp'
+
+
+    //UTILS
+    implementation 'org.apache.commons:commons-lang3:3.14.0'
+    implementation 'com.alibaba.fastjson2:fastjson2:2.0.43'
+    implementation 'org.springdoc:springdoc-openapi-starter-webflux-ui:2.3.0'
+
+
+    //JAKARTA
+    implementation 'jakarta.validation:jakarta.validation-api:3.0.2'
+
+    //LOMBOK
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    //MAPPER
+    implementation 'org.mapstruct:mapstruct:1.5.5.Final'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
+
+    //DATABASE
+    implementation 'org.postgresql:r2dbc-postgresql:1.0.2.RELEASE'
+    implementation 'org.postgresql:postgresql:42.6.0'
+
+    //JWT
+    implementation 'io.jsonwebtoken:jjwt-api:0.12.2'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.2'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.2'
+
+    //TEST
+    testImplementation "org.testcontainers:spock:1.19.1"
+    testImplementation "org.testcontainers:testcontainers:1.19.1"
+    testImplementation 'org.testcontainers:postgresql:1.19.1'
+    testImplementation 'io.projectreactor:reactor-test'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.spockframework:spock-core:2.4-M1-groovy-4.0'
+    testImplementation 'org.spockframework:spock-spring:2.4-M1-groovy-4.0'
+    implementation 'org.apache.groovy:groovy-all:4.0.15'
+    testImplementation 'org.liquibase:liquibase-core:4.24.0'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

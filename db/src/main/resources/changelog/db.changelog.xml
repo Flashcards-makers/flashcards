@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd"
+                   objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+
+    <include file="/changelog/schema/20241108110840_user_table.xml"/>
+    <include file="/changelog/schema/20241108110912_flashcards.xml"/>
+    <include file="/changelog/schema/20241109111015_role_table.xml"/>
+    <include file="/changelog/schema/20241109111543_activate_user.xml"/>
+    <include file="/changelog/schema/20241109112505_refresh_token.xml"/>
+</databaseChangeLog>

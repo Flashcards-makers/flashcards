@@ -1,0 +1,68 @@
+import org.gradle.api.JavaVersion
+import org.gradle.jvm.toolchain.JavaLanguageVersion
+
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.3.5'
+    id 'io.spring.dependency-management' version '1.1.6'
+}
+
+group = 'pl.ztp.flashcards'
+version = '0.0.1-SNAPSHOT'
+
+bootJar {
+    enabled = false
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
+    implementation 'jakarta.validation:jakarta.validation-api:3.0.2'
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+//    implementation 'org.apache.commons:commons-dbcp2:2.11.0'
+
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'io.projectreactor:reactor-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+
+    //MAPPER
+    implementation 'org.mapstruct:mapstruct:1.5.5.Final'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
+
+    //JWT
+    implementation 'io.jsonwebtoken:jjwt-api:0.12.2'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.2'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.2'
+
+    // UTILS
+    implementation 'org.apache.commons:commons-lang3:3.13.0'
+
+    //ASPECT
+    runtimeOnly 'org.aspectj:aspectjweaver:1.9.20.1'
+    implementation 'org.aspectj:aspectjrt:1.9.20.1'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+tasks.register("prepareKotlinBuildScriptModel"){}
