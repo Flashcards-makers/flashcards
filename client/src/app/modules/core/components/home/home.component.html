@@ -1,0 +1,13 @@
+<app-header [title]="'Flashcards'" [showSearch]="true" [showLogout]="true"></app-header>
+
+<div class="container">
+  <div class="content">
+    <div class="tile-container" *ngIf="flashcardsList && flashcardsList.length > 0">
+      <div class="tile" *ngFor="let flashcard of flashcardsList">
+        <img src='{{flashcard.icon}}' alt='Icon'>
+        <h2>{{flashcard.name}}</h2>
+        <p>{{ flashcard.description }}</p>
+      </div>
+    </div>
+  </div>
+</div>
