@@ -1,11 +1,11 @@
 package pl.ztp.flashcards.common.service;
 
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import pl.ztp.flashcards.common.entity.RolesEntity;
 import pl.ztp.flashcards.common.entity.UsersEntity;
 import pl.ztp.flashcards.common.repository.RolesRepository;
 import pl.ztp.flashcards.common.repository.UsersRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
 

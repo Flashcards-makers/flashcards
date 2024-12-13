@@ -1,12 +1,5 @@
 package pl.ztp.flashcards.server
 
-
-import pl.ztp.flashcards.common.dto.UserInfoUserDetails
-import pl.ztp.flashcards.server.dto.request.PageDto
-import pl.ztp.flashcards.server.dto.request.SaveFlashardsRequest
-import pl.ztp.flashcards.server.dto.response.FlashcardsListResponse
-import pl.ztp.flashcards.server.dto.response.PagesListResponse
-import pl.ztp.flashcards.server.service.FlashcardsService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpHeaders
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
@@ -15,6 +8,12 @@ import org.springframework.security.test.context.TestSecurityContextHolder
 import org.springframework.security.test.context.support.ReactorContextTestExecutionListener
 import org.springframework.test.context.TestExecutionListener
 import org.springframework.test.web.reactive.server.WebTestClient
+import pl.ztp.flashcards.common.dto.UserInfoUserDetails
+import pl.ztp.flashcards.server.dto.request.PageDto
+import pl.ztp.flashcards.server.dto.request.SaveFlashardsRequest
+import pl.ztp.flashcards.server.dto.response.FlashcardsListResponse
+import pl.ztp.flashcards.server.dto.response.PagesListResponse
+import pl.ztp.flashcards.server.service.FlashcardsService
 
 class PagesSpecification extends BaseSpecification {
 
@@ -26,7 +25,7 @@ class PagesSpecification extends BaseSpecification {
 
     private TestExecutionListener reactorContextTestExecutionListener = new ReactorContextTestExecutionListener();
 
-    private void saveFlashcards(){
+    private void saveFlashcards() {
         UserInfoUserDetails userDetails = new UserInfoUserDetails(user)
         SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority("USER")
         TestSecurityContextHolder.setAuthentication(new UsernamePasswordAuthenticationToken(userDetails, user.getPassword(), List.of(simpleGrantedAuthority)))

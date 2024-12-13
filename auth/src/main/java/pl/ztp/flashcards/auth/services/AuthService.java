@@ -1,5 +1,10 @@
 package pl.ztp.flashcards.auth.services;
 
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 import pl.ztp.flashcards.auth.dto.request.LoginRequest;
 import pl.ztp.flashcards.auth.dto.request.RefreshTokenRequest;
 import pl.ztp.flashcards.auth.dto.request.RegisterAcceptRequest;
@@ -17,12 +22,6 @@ import pl.ztp.flashcards.common.exception.NotFoundException;
 import pl.ztp.flashcards.common.i18n.MessagesEnum;
 import pl.ztp.flashcards.common.repository.UsersRepository;
 import pl.ztp.flashcards.common.service.JWTService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.ReactiveUserDetailsService;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
 

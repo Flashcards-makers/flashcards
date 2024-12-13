@@ -1,10 +1,10 @@
 package pl.ztp.flashcards.server.service;
 
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import pl.ztp.flashcards.common.dto.UserInfoUserDetails;
 import pl.ztp.flashcards.server.entity.PagesEntity;
 import pl.ztp.flashcards.server.repository.PagesRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
 @Service
@@ -17,6 +17,7 @@ public class PagesService {
                 .flatMap(id -> pagesRepository.findFirstByFlashcardsIdAndUserId(flashcardId, id));
 
     }
+
     public Mono<PagesEntity> getPageByFlashcardIdAndPreviousPageId(Long flashcardId, Long previousPageId, UserInfoUserDetails userDetails) {
         return Mono.just(userDetails.getId())
                 .flatMap(id -> pagesRepository.findByFlashcardsIdAndPreviousPageId(flashcardId, id, previousPageId))

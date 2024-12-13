@@ -1,12 +1,12 @@
 package pl.ztp.flashcards.common.config;
 
-import pl.ztp.flashcards.common.Constants;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.server.authentication.ServerAuthenticationConverter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
+import pl.ztp.flashcards.common.Constants;
 import reactor.core.publisher.Mono;
 
 @Component

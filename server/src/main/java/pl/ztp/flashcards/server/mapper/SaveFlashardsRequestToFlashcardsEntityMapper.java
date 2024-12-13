@@ -1,9 +1,9 @@
 package pl.ztp.flashcards.server.mapper;
 
+import org.mapstruct.Mapping;
 import pl.ztp.flashcards.common.mapper.Mapper;
 import pl.ztp.flashcards.server.dto.request.SaveFlashardsRequest;
 import pl.ztp.flashcards.server.entity.FlashcardsEntity;
-import org.mapstruct.Mapping;
 
 @org.mapstruct.Mapper(uses = {SaveFlashardsRequestToFlashcardsEntityMapper.class})
 public abstract class SaveFlashardsRequestToFlashcardsEntityMapper implements Mapper<SaveFlashardsRequest, FlashcardsEntity> {

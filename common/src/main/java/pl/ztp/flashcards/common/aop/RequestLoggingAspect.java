@@ -1,29 +1,18 @@
 package pl.ztp.flashcards.common.aop;
 
-import pl.ztp.flashcards.common.utils.CommonUtils;
-import pl.ztp.flashcards.common.utils.StopWatch;
 import lombok.extern.log4j.Log4j2;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
+import pl.ztp.flashcards.common.utils.CommonUtils;
+import pl.ztp.flashcards.common.utils.StopWatch;
 import reactor.core.publisher.Mono;
 
 @Aspect
 @Component
 @Log4j2
 public class RequestLoggingAspect {
-
-    @Around("@annotation(Loggable)")
-    public Object logAround(ProceedingJoinPoint joinPoint) throws Throwable {
-        StopWatch stopwatch = StopWatch.start();
-        var result = joinPoint.proceed();
-        if (result instanceof Mono<?> monoResult)
-            return monoResult
-                    .doOnSuccess(o -> logRequestAndResponse(joinPoint, o, stopwatch));
-        else
-            return result;
-    }
 
     private static void logRequestAndResponse(ProceedingJoinPoint joinPoint, Object o, StopWatch stopwatch) {
         String response = CommonUtils.getStringOrEmptyIfNull(o.toString());
@@ -35,5 +24,16 @@ public class RequestLoggingAspect {
                 joinPoint.getSignature().getDeclaringTypeName(), joinPoint.getSignature().getName(),
                 joinPoint.getArgs()[0],
                 response, stopwatch.stop());
+    }
+
+    @Around("@annotation(Loggable)")
+    public Object logAround(ProceedingJoinPoint joinPoint) throws Throwable {
+        StopWatch stopwatch = StopWatch.start();
+        var result = joinPoint.proceed();
+        if (result instanceof Mono<?> monoResult)
+            return monoResult
+                    .doOnSuccess(o -> logRequestAndResponse(joinPoint, o, stopwatch));
+        else
+            return result;
     }
 }

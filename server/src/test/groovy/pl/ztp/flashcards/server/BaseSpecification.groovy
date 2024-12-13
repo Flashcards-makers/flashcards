@@ -1,9 +1,5 @@
 package pl.ztp.flashcards.server
 
-import org.testcontainers.utility.DockerImageName;
-import pl.ztp.flashcards.common.entity.UsersEntity
-import pl.ztp.flashcards.common.repository.UsersRepository
-import pl.ztp.flashcards.common.service.JWTService
 import org.spockframework.spring.EnableSharedInjection
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -13,6 +9,10 @@ import org.springframework.test.context.DynamicPropertyRegistry
 import org.springframework.test.context.DynamicPropertySource
 import org.testcontainers.containers.PostgreSQLContainer
 import org.testcontainers.spock.Testcontainers
+import org.testcontainers.utility.DockerImageName
+import pl.ztp.flashcards.common.entity.UsersEntity
+import pl.ztp.flashcards.common.repository.UsersRepository
+import pl.ztp.flashcards.common.service.JWTService
 import spock.lang.Shared
 import spock.lang.Specification
 
@@ -55,13 +55,13 @@ abstract class BaseSpecification extends Specification {
     def setupSpec() {
         println('run setupSpec()')
         Boolean userExists = usersRepository.existsByUserName(user.getUserName()).block()
-        if(userExists == Boolean.FALSE) {
+        if (userExists == Boolean.FALSE) {
             usersRepository.save(user)
                     .log("User Saved")
                     .block()
         }
 
-        if(Objects.isNull(jwtToken))
+        if (Objects.isNull(jwtToken))
             jwtToken = jwtService.generateToken(user.getEmail())
     }
 }

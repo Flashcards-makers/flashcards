@@ -4,8 +4,8 @@ import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import pl.ztp.flashcards.common.entity.UsersEntity;
 import pl.ztp.flashcards.common.entity.RolesEntity;
+import pl.ztp.flashcards.common.entity.UsersEntity;
 
 import java.util.Collection;
 import java.util.List;

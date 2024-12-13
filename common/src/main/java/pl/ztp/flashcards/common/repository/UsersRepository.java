@@ -1,10 +1,10 @@
 package pl.ztp.flashcards.common.repository;
 
-import pl.ztp.flashcards.common.entity.UsersEntity;
 import org.springframework.data.r2dbc.repository.Query;
 import org.springframework.data.r2dbc.repository.R2dbcRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import pl.ztp.flashcards.common.entity.UsersEntity;
 import reactor.core.publisher.Mono;
 
 @Repository

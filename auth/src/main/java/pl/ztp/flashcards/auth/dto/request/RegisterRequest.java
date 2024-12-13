@@ -14,4 +14,5 @@ public record RegisterRequest(
         String password,
         @Email
         String email
-) { }
+) {
+}
