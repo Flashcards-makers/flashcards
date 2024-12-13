@@ -17,6 +17,9 @@ import pl.ztp.flashcards.mail.utils.FileUtils;
 import java.net.URISyntaxException;
 import java.util.Objects;
 
+import static com.aventrix.jnanoid.jnanoid.NanoIdUtils.DEFAULT_ALPHABET;
+import static com.aventrix.jnanoid.jnanoid.NanoIdUtils.DEFAULT_NUMBER_GENERATOR;
+
 @Service
 @Log4j2
 @RequiredArgsConstructor
@@ -44,7 +47,7 @@ public class MailVerificationConsumer {
         if (Objects.nonNull(entity)) {
             log.info("Message received with body: {}", entity.toString());
 
-            String uuid = NanoIdUtils.randomNanoId();
+            String uuid = NanoIdUtils.randomNanoId(DEFAULT_NUMBER_GENERATOR, DEFAULT_ALPHABET, 6);
             MimeMessage mimeMessage = emailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");
             String htmlMsg = FileUtils.loadFileFromResources(VERIFICATION_MAIL_PATH);

@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import pl.ztp.flashcards.auth.amqp.RabbitMQProducer;
 import pl.ztp.flashcards.auth.dto.request.LoginRequest;
 import pl.ztp.flashcards.auth.dto.request.RefreshTokenRequest;
 import pl.ztp.flashcards.auth.dto.request.RegisterAcceptRequest;
@@ -36,6 +37,7 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final UsersRepository usersRepository;
     private final ActivateRepository activateRepository;
+    private final RabbitMQProducer rabbitMQProducer;
 
 
     public Mono<ResponseEntity<?>> login(LoginRequest loginRequest) {
@@ -64,7 +66,8 @@ public class AuthService {
     }
 
     public Mono<UsersEntity> saveUser(RegisterRequest registerRequest) {
-        return usersRepository.save(RegisterRequestToUsersEntityMapper.INSTANCE.sourceToDestination(encodePassword(registerRequest)));
+        return usersRepository.save(RegisterRequestToUsersEntityMapper.INSTANCE.sourceToDestination(encodePassword(registerRequest)))
+                .doOnNext(rabbitMQProducer::sendMessage);
     }
 
     public Mono<ActivateEntity> registerAccept(RegisterAcceptRequest request) {
