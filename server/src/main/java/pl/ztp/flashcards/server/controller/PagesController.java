@@ -1,6 +1,8 @@
 package pl.ztp.flashcards.server.controller;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import pl.ztp.flashcards.common.aop.Loggable;
+import pl.ztp.flashcards.common.dto.UserInfoUserDetails;
 import pl.ztp.flashcards.server.service.PagesService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -19,14 +21,14 @@ public class PagesController {
 
     @GetMapping("/{flashcardId}")
     @Loggable
-    public Mono<ResponseEntity<?>> getPagesByFlashcardId(@PathVariable Long flashcardId) {
-        return pagesService.getPageByFlashcardId(flashcardId).map(ResponseEntity::ok);
+    public Mono<ResponseEntity<?>> getPagesByFlashcardId(@PathVariable Long flashcardId, @AuthenticationPrincipal UserInfoUserDetails userDetails) {
+        return pagesService.getPageByFlashcardId(flashcardId, userDetails).map(ResponseEntity::ok);
     }
 
     @GetMapping("/{flashcardId}/{previousPageId}")
     @Loggable
-    public Mono<ResponseEntity<?>> getPagesByFlashcardIdAndPreviousPageId(@PathVariable Long flashcardId, @PathVariable Long previousPageId) {
-        return pagesService.getPageByFlashcardIdAndPreviousPageId(flashcardId, previousPageId).map(ResponseEntity::ok);
+    public Mono<ResponseEntity<?>> getPagesByFlashcardIdAndPreviousPageId(@PathVariable Long flashcardId, @PathVariable Long previousPageId, @AuthenticationPrincipal UserInfoUserDetails userDetails) {
+        return pagesService.getPageByFlashcardIdAndPreviousPageId(flashcardId, previousPageId, userDetails).map(ResponseEntity::ok);
     }
 
 }

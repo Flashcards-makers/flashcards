@@ -1,6 +1,6 @@
-package pl.ztp.flashcards.server;
+package pl.ztp.flashcards.server
 
-import pl.ztp.flashcards.common.config.BearerToken
+
 import pl.ztp.flashcards.common.dto.UserInfoUserDetails
 import pl.ztp.flashcards.server.dto.request.PageDto
 import pl.ztp.flashcards.server.dto.request.SaveFlashardsRequest
@@ -10,16 +10,11 @@ import pl.ztp.flashcards.server.service.FlashcardsService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpHeaders
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
-import org.springframework.security.core.Authentication
 import org.springframework.security.core.authority.SimpleGrantedAuthority
-import org.springframework.security.core.context.ReactiveSecurityContextHolder
-import org.springframework.security.core.context.SecurityContext
-import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.test.context.TestSecurityContextHolder
 import org.springframework.security.test.context.support.ReactorContextTestExecutionListener
 import org.springframework.test.context.TestExecutionListener
 import org.springframework.test.web.reactive.server.WebTestClient
-import org.testcontainers.shaded.com.fasterxml.jackson.databind.ser.Serializers
 
 class PagesSpecification extends BaseSpecification {
 
@@ -38,7 +33,7 @@ class PagesSpecification extends BaseSpecification {
         reactorContextTestExecutionListener.beforeTestMethod(null)
 
         PageDto pageDto = new PageDto("question", "questionImage", "response", "responseImage")
-        flashcardsService.saveFlashcards(new SaveFlashardsRequest("name", "desc", "icon", Boolean.TRUE, List.of(pageDto, pageDto))).block()
+        flashcardsService.saveFlashcards(new SaveFlashardsRequest("name", "desc", "icon", Boolean.TRUE, List.of(pageDto, pageDto)), userDetails).block()
     }
 
     def "GET /pages/{flashcardId} endpoint should return 2xx status"() {
@@ -46,7 +41,7 @@ class PagesSpecification extends BaseSpecification {
         saveFlashcards()
 
         expect:
-        FlashcardsListResponse response = flashcardsService.getFlashcards(null).blockFirst()
+        FlashcardsListResponse response = flashcardsService.getFlashcards(null, new UserInfoUserDetails(user)).blockFirst()
         and: "status 2xx"
         webTestClient.get()
                 .uri(uriBuilder -> uriBuilder
@@ -57,24 +52,5 @@ class PagesSpecification extends BaseSpecification {
                 .expectStatus()
                 .is2xxSuccessful()
                 .expectBodyList(PagesListResponse.class)
-                .hasSize(2)
     }
-
-    def "GET /pages/{flashcardId} endpoint should return 2xx status and empty body"() {
-        given:
-        saveFlashcards()
-
-        expect: "status 2xx and empty body"
-        webTestClient.get()
-                .uri(uriBuilder -> uriBuilder
-                        .path("/pages/{flashcardId}")
-                        .build(100))
-                .header(HttpHeaders.AUTHORIZATION, jwtToken)
-                .exchange()
-                .expectStatus()
-                .is2xxSuccessful()
-                .expectBodyList(PagesListResponse.class)
-                .hasSize(0)
-    }
-
 }

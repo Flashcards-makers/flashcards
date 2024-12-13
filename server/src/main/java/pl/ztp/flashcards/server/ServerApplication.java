@@ -1,7 +1,11 @@
 package pl.ztp.flashcards.server;
 
+import jakarta.annotation.PostConstruct;
+import org.mapstruct.factory.Mappers;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import pl.ztp.flashcards.common.mapper.MapFactory;
+import pl.ztp.flashcards.server.mapper.*;
 
 @SpringBootApplication
 public class ServerApplication {

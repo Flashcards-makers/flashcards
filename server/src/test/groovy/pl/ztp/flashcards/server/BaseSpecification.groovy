@@ -1,5 +1,6 @@
-package pl.ztp.flashcards.server;
+package pl.ztp.flashcards.server
 
+import org.testcontainers.utility.DockerImageName;
 import pl.ztp.flashcards.common.entity.UsersEntity
 import pl.ztp.flashcards.common.repository.UsersRepository
 import pl.ztp.flashcards.common.service.JWTService
@@ -12,14 +13,12 @@ import org.springframework.test.context.DynamicPropertyRegistry
 import org.springframework.test.context.DynamicPropertySource
 import org.testcontainers.containers.PostgreSQLContainer
 import org.testcontainers.spock.Testcontainers
-import org.testcontainers.utility.DockerImageName
 import spock.lang.Shared
 import spock.lang.Specification
 
 @Testcontainers
 @ActiveProfiles("test")
-// TODO: KK
-//@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @EnableSharedInjection
 @EnableAspectJAutoProxy
 abstract class BaseSpecification extends Specification {
@@ -32,14 +31,12 @@ abstract class BaseSpecification extends Specification {
     @Shared
     private JWTService jwtService
 
-    @Shared
-    protected UsersEntity user = new UsersEntity(name: "test", surname: "test", userName: "test_test", password: "1234", email: "test@test.com")
+    protected static final UsersEntity user = new UsersEntity(name: "test", surname: "test", userName: "test_test", password: "1234", email: "test@test.com")
 
     @Shared
     protected String jwtToken
 
-    // TODO: KK
-    public static PostgreSQLContainer<? extends PostgreSQLContainer> postgreSQLContainer = new PostgreSQLContainer<>(null)//DockerImageName.parse("postgres:16.0"))
+    public static PostgreSQLContainer<? extends PostgreSQLContainer> postgreSQLContainer = new PostgreSQLContainer<>(DockerImageName.parse("postgres:16.0"))
             .withDatabaseName("flashcards")
             .withPassword("postgres")
             .withUsername("postgres")
@@ -55,7 +52,7 @@ abstract class BaseSpecification extends Specification {
         registry.add("spring.liquibase.url", () -> postgreSQLContainer.getJdbcUrl())
     }
 
-    def setup() {
+    def setupSpec() {
         println('run setupSpec()')
         Boolean userExists = usersRepository.existsByUserName(user.getUserName()).block()
         if(userExists == Boolean.FALSE) {
@@ -64,8 +61,7 @@ abstract class BaseSpecification extends Specification {
                     .block()
         }
 
-
-        jwtToken = jwtService.generateToken(user.getEmail())
+        if(Objects.isNull(jwtToken))
+            jwtToken = jwtService.generateToken(user.getEmail())
     }
 }
-

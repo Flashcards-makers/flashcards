@@ -1,8 +1,8 @@
 package pl.ztp.flashcards.server.service;
 
+import pl.ztp.flashcards.common.dto.UserInfoUserDetails;
 import pl.ztp.flashcards.common.mapper.MapFactory;
 import pl.ztp.flashcards.common.repository.UsersRepository;
-import pl.ztp.flashcards.common.utils.SecurityUtils;
 import pl.ztp.flashcards.server.dto.request.SaveFlashardsRequest;
 import pl.ztp.flashcards.server.dto.response.FlashcardsListResponse;
 import pl.ztp.flashcards.server.entity.FlashcardsEntity;
@@ -38,14 +38,14 @@ public class FlashcardsService {
     }
 
     @Transactional
-    public Mono<Boolean> saveFlashcards(SaveFlashardsRequest request) {
-        Mono<FlashcardsEntity> flashcardsEntity = saveFlashcardsEntity(request);
+    public Mono<Boolean> saveFlashcards(SaveFlashardsRequest request, UserInfoUserDetails userDetails) {
+        Mono<FlashcardsEntity> flashcardsEntity = saveFlashcardsEntity(request, userDetails);
         Flux<PagesEntity> pagesEntity = savePagesEntity(flashcardsEntity);
         return pagesEntity.collectList().hasElement();
     }
 
-    public Flux<FlashcardsListResponse> getFlashcards(String name) {
-        return SecurityUtils.getLoggedUserId()
+    public Flux<FlashcardsListResponse> getFlashcards(String name, UserInfoUserDetails userDetails) {
+        return Mono.just(userDetails.getId())
                 .flatMapMany(id -> this.findAllByUserAndName(id, name))
                 .map(flashcardsEntity -> MapFactory.map(flashcardsEntity, FlashcardsListResponse.class))
                 .publishOn(Schedulers.boundedElastic())
@@ -68,8 +68,9 @@ public class FlashcardsService {
         return pagesRepository.saveAll(getPagesEntityFlux(flashcardsEntity));
     }
 
-    private Mono<FlashcardsEntity> saveFlashcardsEntity(SaveFlashardsRequest request) {
-        return SecurityUtils.getLoggedUserId().map(id -> {
+    private Mono<FlashcardsEntity> saveFlashcardsEntity(SaveFlashardsRequest request, UserInfoUserDetails userDetails) {
+        return Mono.just(userDetails.getId())
+                .map(id -> {
                     FlashcardsEntity entity = MapFactory.map(request, FlashcardsEntity.class);
                     entity.setCreatedBy(id);
                     return entity;

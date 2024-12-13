@@ -33,7 +33,7 @@ class FlashcardsSpecification extends BaseSpecification {
         reactorContextTestExecutionListener.beforeTestMethod(null)
 
         PageDto pageDto = new PageDto("question", "questionImage", "response", "responseImage")
-        flashcardsService.saveFlashcards(new SaveFlashardsRequest("Polish", "desc", "icon", Boolean.TRUE, List.of(pageDto, pageDto))).block()
+        flashcardsService.saveFlashcards(new SaveFlashardsRequest("Polish", "desc", "icon", Boolean.TRUE, List.of(pageDto, pageDto)), userDetails).block()
     }
 
     def "JWT token should be generated"() {
@@ -48,7 +48,7 @@ class FlashcardsSpecification extends BaseSpecification {
                 new SaveFlashardsRequest("English", "English flashcards", "icon", Boolean.TRUE, List.of(pageDto, pageDto))
         expect: "status 2xx"
         webTestClient.post()
-                .uri("/flashcards")
+                .uri("/")
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(saveFlashardsRequest)
                 .header(HttpHeaders.AUTHORIZATION, jwtToken)
@@ -62,7 +62,7 @@ class FlashcardsSpecification extends BaseSpecification {
         saveFlashcards()
         expect: "status 2xx"
         webTestClient.get()
-                .uri("/flashcards/list")
+                .uri("/list")
                 .header(HttpHeaders.AUTHORIZATION, jwtToken)
                 .exchange()
                 .expectStatus()
@@ -77,7 +77,7 @@ class FlashcardsSpecification extends BaseSpecification {
         expect: "status 2xx and list with 1 element"
         webTestClient.get()
                 .uri(uriBuilder -> uriBuilder
-                        .path("/flashcards/list")
+                        .path("/list")
                         .queryParam("name", "Pol")
                         .build())
                 .header(HttpHeaders.AUTHORIZATION, jwtToken)
@@ -96,7 +96,7 @@ class FlashcardsSpecification extends BaseSpecification {
         expect: "status 2xx and list with 0 element"
         webTestClient.get()
                 .uri(uriBuilder -> uriBuilder
-                        .path("/flashcards/list")
+                        .path("/list")
                         .queryParam("name", "De")
                         .build())
                 .header(HttpHeaders.AUTHORIZATION, jwtToken)
