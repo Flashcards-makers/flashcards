@@ -1,0 +1,18 @@
+<div class="search-container">
+  <form (ngSubmit)="onSearch()">
+    <input 
+      type="text" 
+      name="searchQuery" 
+      placeholder="Wpisz frazę" 
+      required 
+      [(ngModel)]="searchQuery" 
+    />
+    <button type="submit">Szukaj</button>
+  </form>
+  <div *ngIf="flashcards.length > 0">
+    <h3>Wyniki wyszukiwania:</h3>
+    <ul>
+      <li *ngFor="let flashcard of flashcards">{{ flashcard.name }}</li>
+    </ul>
+  </div>
+</div>

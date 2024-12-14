@@ -5,9 +5,10 @@ import { HomeComponent } from './home/home.component';
 import { SharedModule } from '../../shared/shared.module';
 import { CoreModule } from '../core.module';
 import { HeaderComponent } from './header/header.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
-  declarations: [HomeComponent, HeaderComponent],
+  declarations: [HomeComponent, HeaderComponent, SearchComponent],
   imports: [SharedModule, DashboardRoutingModule, CoreModule],
 })
 export class DashboardModule {}
