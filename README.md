@@ -62,6 +62,14 @@ Flashcards is an application for creating and solving flashcards. It features a 
    ```
 8. Access the application at `http://localhost:4200/`.
 
+## Database
+
+The project uses a PostgreSQL database, which is managed by Liquibase. Liquibase is used to manage database migrations and write code in multiple formats, which is then converted to SQL. In this project, I use XML notation.
+
+Entity Relationship Diagram (ERD)
+
+![schema](doc/schema.png)
+
 ## Endpoints
 
 ### FlashcardsController
