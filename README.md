@@ -19,16 +19,16 @@ Flashcards is an application for creating and solving flashcards. It features a 
 ## Services
 
 - **mail**:  
-  Java Spring service that sends activation emails when a user registers successfully.
+  It's a service written in Java and Spring Framework. It listens for messages sent by the service to the queue and sends an activation email if the user has registered correctly.
 
 - **db**:  
-  Stores Liquibase changelogs for database migrations.
+  This is the service where changelogs for the Liquibase tool are stored.
 
 - **service**:  
-  Main application written in Java using Spring WebFlux for reactive programming.
+  This is the main application written in Java and Spring Framework. It uses the Spring Webflux reactive programming library.
 
 - **auth**:  
-  Handles user registration and authorization. Sends messages to the queue for the mail service to trigger email notifications.
+  This is a service that deals with user authorization and registration, after correct registration sends a message to the queue to send an email through the mail service
 
 ## Getting Started
 
