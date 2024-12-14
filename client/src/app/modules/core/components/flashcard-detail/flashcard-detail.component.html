@@ -1,0 +1,9 @@
+<div class="flashcard-details-container" *ngIf="flashcardName; else loading">
+  <h1 class="flashcard-title">Flashcard Details</h1>
+  <p class="flashcard-info">Flashcard Name: <span class="flashcard-name">{{ flashcardName }}</span></p>
+  <p class="flashcard-info">Flashcard Description: <span class="flashcard-description">{{ flashcardDescription }}</span></p>
+</div>
+
+<ng-template #loading>
+  <p class="loading-message">Loading flashcard details...</p>
+</ng-template>

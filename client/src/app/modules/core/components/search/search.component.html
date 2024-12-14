@@ -3,16 +3,20 @@
     <input 
       type="text" 
       name="searchQuery" 
-      placeholder="Wpisz frazę" 
+      placeholder="Enter phrase" 
       required 
       [(ngModel)]="searchQuery" 
     />
-    <button type="submit">Szukaj</button>
+    <button type="submit">Search</button>
   </form>
   <div *ngIf="flashcards.length > 0">
-    <h3>Wyniki wyszukiwania:</h3>
+    <h3>Search Results:</h3>
     <ul>
-      <li *ngFor="let flashcard of flashcards">{{ flashcard.name }}</li>
+      <li *ngFor="let flashcard of flashcards">
+       <a [routerLink]="'/flashcard/' + flashcard.id">
+  {{ flashcard.name }}
+</a>
+      </li>
     </ul>
   </div>
 </div>

@@ -1,0 +1,37 @@
+<div class="add-flashcard-container">
+  <h2>Add a New Flashcard</h2>
+  <form [formGroup]="flashcardForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input
+        id="name"
+        type="text"
+        formControlName="name"
+        placeholder="Enter flashcard name"
+        required
+      />
+      <div *ngIf="flashcardForm.get('name')?.invalid && flashcardForm.get('name')?.touched">
+        Name is required.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="description">Description:</label>
+      <textarea
+        id="description"
+        formControlName="description"
+        placeholder="Enter flashcard description"
+        required
+      ></textarea>
+      <div *ngIf="flashcardForm.get('description')?.invalid && flashcardForm.get('description')?.touched">
+        Description is required.
+      </div>
+    </div>
+    <button type="submit" [disabled]="flashcardForm.invalid">Add Flashcard</button>
+  </form>
+  <div *ngIf="successMessage" class="success-message">
+    Flashcard added successfully!
+  </div>
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+</div>

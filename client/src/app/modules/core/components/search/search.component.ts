@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { FlashcardsEntity } from '../../../../types/Flashcard';
 
 @Component({
   selector: 'app-search',
@@ -8,21 +9,22 @@ import { HttpClient } from '@angular/common/http';
 })
 export class SearchComponent {
   searchQuery: string = '';
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  flashcards: any[] = [];
+  flashcards: FlashcardsEntity[] = [];
 
   constructor(private http: HttpClient) {}
 
   onSearch(): void {
     if (this.searchQuery.trim()) {
       this.http
-        .get<unknown[]>(`/api/list`, { params: { name: this.searchQuery } })
+        .get<FlashcardsEntity[]>(`/api/list`, {
+          params: { name: this.searchQuery },
+        })
         .subscribe({
           next: (data) => {
             this.flashcards = data;
           },
           error: (err) => {
-            console.error('Błąd podczas wyszukiwania:', err);
+            console.error('Error while searching:', err);
           },
         });
     }

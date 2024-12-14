@@ -6,9 +6,18 @@ import { SharedModule } from '../../shared/shared.module';
 import { CoreModule } from '../core.module';
 import { HeaderComponent } from './header/header.component';
 import { SearchComponent } from './search/search.component';
+import { FormsModule } from '@angular/forms';
+import { FlashcardDetailComponent } from './flashcard-detail/flashcard-detail.component';
+import { AddFlashcardComponent } from './add-flashcard/add-flashcard.component';
 
 @NgModule({
-  declarations: [HomeComponent, HeaderComponent, SearchComponent],
-  imports: [SharedModule, DashboardRoutingModule, CoreModule],
+  declarations: [
+    HomeComponent,
+    HeaderComponent,
+    SearchComponent,
+    FlashcardDetailComponent,
+    AddFlashcardComponent,
+  ],
+  imports: [SharedModule, DashboardRoutingModule, CoreModule, FormsModule],
 })
 export class DashboardModule {}

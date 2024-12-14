@@ -1,5 +1,4 @@
 import { Component, OnDestroy } from '@angular/core';
-
 import { FormControl, FormGroup } from '@angular/forms';
 import { FormService } from '../../../core/services/form.service';
 import { RegisterForm } from '../../../core/models/register.form.model';
