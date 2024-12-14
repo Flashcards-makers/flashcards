@@ -1,15 +1,15 @@
 package pl.ztp.flashcards.server.controller;
 
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import pl.ztp.flashcards.common.aop.Loggable;
-import pl.ztp.flashcards.common.dto.UserInfoUserDetails;
-import pl.ztp.flashcards.server.service.PagesService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import pl.ztp.flashcards.common.aop.Loggable;
+import pl.ztp.flashcards.common.dto.UserInfoUserDetails;
+import pl.ztp.flashcards.server.service.PagesService;
 import reactor.core.publisher.Mono;
 
 @RestController

@@ -1,79 +1,79 @@
 plugins {
-	id 'groovy'
-	id 'org.springframework.boot' version '3.3.5'
-	id 'io.spring.dependency-management' version '1.1.6'
+    id 'groovy'
+    id 'org.springframework.boot' version '3.3.5'
+    id 'io.spring.dependency-management' version '1.1.6'
 }
 
 group = 'pl.ztp.flashcards'
 version = '0.0.1-SNAPSHOT'
 
 java {
-	sourceCompatibility = JavaVersion.VERSION_21
+    sourceCompatibility = JavaVersion.VERSION_21
 }
 
 compileJava {
-	options.annotationProcessorPath = configurations.annotationProcessor
+    options.annotationProcessorPath = configurations.annotationProcessor
 }
 
 configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
 }
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 dependencies {
-	implementation project(':common')
-	testImplementation project(':db')
+    implementation project(':common')
+    testImplementation project(':db')
 
-	//SPRING BOOT
-	implementation 'org.springframework.boot:spring-boot-starter-webflux' exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
-	implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
-	implementation 'org.springframework.boot:spring-boot-starter-security'
+    //SPRING BOOT
+    implementation 'org.springframework.boot:spring-boot-starter-webflux' exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+    implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
 
-	//LOMBOK
-	compileOnly 'org.projectlombok:lombok'
-	annotationProcessor 'org.projectlombok:lombok'
+    //LOMBOK
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
 
-	//MAPPER
-	implementation 'org.mapstruct:mapstruct:1.5.5.Final'
-	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
+    //MAPPER
+    implementation 'org.mapstruct:mapstruct:1.5.5.Final'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.5.Final'
 
-	//DATABASE
-	implementation 'org.postgresql:r2dbc-postgresql:1.0.2.RELEASE'
-	implementation 'org.postgresql:postgresql:42.7.2'
+    //DATABASE
+    implementation 'org.postgresql:r2dbc-postgresql:1.0.2.RELEASE'
+    implementation 'org.postgresql:postgresql:42.7.2'
 
-	//JWT
-	implementation 'io.jsonwebtoken:jjwt-api:0.12.2'
-	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.2'
-	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.2'
+    //JWT
+    implementation 'io.jsonwebtoken:jjwt-api:0.12.2'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.2'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.2'
 
-	//TEST
-	testImplementation "org.testcontainers:spock:1.20.4"
-	testImplementation "org.testcontainers:testcontainers:1.20.4"
-	testImplementation 'org.testcontainers:postgresql:1.20.4'
-	testImplementation 'io.projectreactor:reactor-test'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.spockframework:spock-core:2.4-M4-groovy-4.0'
-	testImplementation 'org.spockframework:spock-spring:2.4-M4-groovy-4.0'
-	implementation 'org.apache.groovy:groovy-all:4.0.24'
-	testImplementation 'org.liquibase:liquibase-core:4.24.0'
-	testImplementation 'org.springframework.security:spring-security-test'
-
-
-	//UTILS
-	implementation 'joda-time:joda-time:2.12.5'
-	implementation 'org.springdoc:springdoc-openapi-starter-webflux-ui:2.3.0'
+    //TEST
+    testImplementation "org.testcontainers:spock:1.20.4"
+    testImplementation "org.testcontainers:testcontainers:1.20.4"
+    testImplementation 'org.testcontainers:postgresql:1.20.4'
+    testImplementation 'io.projectreactor:reactor-test'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.spockframework:spock-core:2.4-M4-groovy-4.0'
+    testImplementation 'org.spockframework:spock-spring:2.4-M4-groovy-4.0'
+    implementation 'org.apache.groovy:groovy-all:4.0.24'
+    testImplementation 'org.liquibase:liquibase-core:4.24.0'
+    testImplementation 'org.springframework.security:spring-security-test'
 
 
-	//ASPECT
-	runtimeOnly 'org.aspectj:aspectjweaver:1.9.20.1'
-	implementation 'org.aspectj:aspectjrt:1.9.20.1'
+    //UTILS
+    implementation 'joda-time:joda-time:2.12.5'
+    implementation 'org.springdoc:springdoc-openapi-starter-webflux-ui:2.3.0'
+
+
+    //ASPECT
+    runtimeOnly 'org.aspectj:aspectjweaver:1.9.20.1'
+    implementation 'org.aspectj:aspectjrt:1.9.20.1'
 }
 
 tasks.named('test') {
-	useJUnitPlatform()
+    useJUnitPlatform()
 }

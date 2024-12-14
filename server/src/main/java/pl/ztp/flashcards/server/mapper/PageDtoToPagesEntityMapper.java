@@ -1,9 +1,9 @@
 package pl.ztp.flashcards.server.mapper;
 
-import pl.ztp.flashcards.server.dto.request.PageDto;
-import pl.ztp.flashcards.server.entity.PagesEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import pl.ztp.flashcards.server.dto.request.PageDto;
+import pl.ztp.flashcards.server.entity.PagesEntity;
 
 @Mapper(uses = {PageDtoToPagesEntityMapper.class})
 public abstract class PageDtoToPagesEntityMapper implements pl.ztp.flashcards.common.mapper.Mapper<PageDto, PagesEntity> {

@@ -1,12 +1,11 @@
 package pl.ztp.flashcards.common.exception.handler;
 
-import pl.ztp.flashcards.common.dto.MessageResponse;
-import pl.ztp.flashcards.common.dto.Response;
-import pl.ztp.flashcards.common.i18n.MessagesEnum;
-import pl.ztp.flashcards.common.i18n.Translator;
 import io.jsonwebtoken.JwtException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+import pl.ztp.flashcards.common.dto.Response;
+import pl.ztp.flashcards.common.i18n.MessagesEnum;
+import pl.ztp.flashcards.common.i18n.Translator;
 
 import java.util.Locale;
 

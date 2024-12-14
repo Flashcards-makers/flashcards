@@ -1,8 +1,8 @@
 package pl.ztp.flashcards.common.utils;
 
-import pl.ztp.flashcards.common.Constants;
 import lombok.experimental.UtilityClass;
 import org.springframework.util.StringUtils;
+import pl.ztp.flashcards.common.Constants;
 
 @UtilityClass
 public class CommonUtils {

@@ -1,7 +1,7 @@
 package pl.ztp.flashcards.common.mapper;
 
-import pl.ztp.flashcards.common.exception.MapperNotFoundException;
 import lombok.experimental.UtilityClass;
+import pl.ztp.flashcards.common.exception.MapperNotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;

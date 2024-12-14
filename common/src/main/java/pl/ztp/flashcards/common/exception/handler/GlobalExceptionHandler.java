@@ -2,20 +2,19 @@ package pl.ztp.flashcards.common.exception.handler;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import pl.ztp.flashcards.common.dto.Response;
-import pl.ztp.flashcards.common.i18n.MessagesEnum;
-import pl.ztp.flashcards.common.i18n.Translator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
-import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.server.ServerWebExchange;
 import org.springframework.web.server.WebExceptionHandler;
 import org.springframework.web.server.i18n.LocaleContextResolver;
+import pl.ztp.flashcards.common.dto.Response;
+import pl.ztp.flashcards.common.i18n.MessagesEnum;
+import pl.ztp.flashcards.common.i18n.Translator;
 import reactor.core.publisher.Mono;
 
 import java.nio.charset.StandardCharsets;
@@ -58,9 +57,9 @@ public class GlobalExceptionHandler implements WebExceptionHandler {
     }
 
     private byte[] convertToBytes(Response.Body obj) {
-        try{
+        try {
             return objectMapper.writeValueAsBytes(obj);
-        }catch (JsonProcessingException e){
+        } catch (JsonProcessingException e) {
             return "Internal server error".getBytes(StandardCharsets.UTF_8);
         }
     }

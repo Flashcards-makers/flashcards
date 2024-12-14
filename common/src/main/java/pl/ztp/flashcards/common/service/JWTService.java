@@ -1,6 +1,5 @@
 package pl.ztp.flashcards.common.service;
 
-import pl.ztp.flashcards.common.Constants;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
@@ -8,6 +7,7 @@ import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import pl.ztp.flashcards.common.Constants;
 
 import javax.crypto.SecretKey;
 import java.util.Date;

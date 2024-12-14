@@ -1,14 +1,13 @@
 package pl.ztp.flashcards.auth.entity;
 
-import pl.ztp.flashcards.auth.enums.ActivateStatus;
-import pl.ztp.flashcards.common.Constants;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
+import pl.ztp.flashcards.auth.enums.ActivateStatus;
+import pl.ztp.flashcards.common.Constants;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Data
 @Table("activate")

@@ -1,6 +1,5 @@
 package pl.ztp.flashcards.common.config;
 
-import pl.ztp.flashcards.common.service.JWTService;
 import io.jsonwebtoken.JwtException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
@@ -8,6 +7,7 @@ import org.springframework.security.authentication.ReactiveAuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.ReactiveUserDetailsService;
+import pl.ztp.flashcards.common.service.JWTService;
 import reactor.core.publisher.Mono;
 
 @RequiredArgsConstructor

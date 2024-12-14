@@ -1,6 +1,5 @@
 package pl.ztp.flashcards.common.config;
 
-import pl.ztp.flashcards.common.entity.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
@@ -14,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 import org.springframework.security.web.server.authentication.AuthenticationWebFilter;
+import pl.ztp.flashcards.common.entity.Role;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 

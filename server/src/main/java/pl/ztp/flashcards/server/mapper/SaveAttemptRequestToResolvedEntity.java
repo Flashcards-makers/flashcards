@@ -1,11 +1,9 @@
 package pl.ztp.flashcards.server.mapper;
 
-import pl.ztp.flashcards.server.dto.request.SaveAttemptRequest;
-import pl.ztp.flashcards.server.dto.response.FlashcardsListResponse;
-import pl.ztp.flashcards.server.entity.FlashcardsEntity;
-import pl.ztp.flashcards.server.entity.ResolvedEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import pl.ztp.flashcards.server.dto.request.SaveAttemptRequest;
+import pl.ztp.flashcards.server.entity.ResolvedEntity;
 
 @Mapper(uses = {SaveAttemptRequestToResolvedEntity.class})
 public abstract class SaveAttemptRequestToResolvedEntity implements pl.ztp.flashcards.common.mapper.Mapper<SaveAttemptRequest, ResolvedEntity> {

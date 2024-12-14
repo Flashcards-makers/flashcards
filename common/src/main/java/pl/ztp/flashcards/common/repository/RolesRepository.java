@@ -1,9 +1,9 @@
 package pl.ztp.flashcards.common.repository;
 
-import pl.ztp.flashcards.common.entity.RolesEntity;
 import org.springframework.data.r2dbc.repository.Query;
 import org.springframework.data.r2dbc.repository.R2dbcRepository;
 import org.springframework.stereotype.Repository;
+import pl.ztp.flashcards.common.entity.RolesEntity;
 import reactor.core.publisher.Flux;
 
 @Repository

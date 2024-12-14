@@ -1,10 +1,10 @@
 package pl.ztp.flashcards.common.service;
 
-import pl.ztp.flashcards.common.dto.UserInfoUserDetails;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.ReactiveUserDetailsService;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import pl.ztp.flashcards.common.dto.UserInfoUserDetails;
 import reactor.core.publisher.Mono;
 
 @Service
