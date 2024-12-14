@@ -1,11 +1,11 @@
 server:
   port: 8080
 auth-service:
-  host: localhost
+  host: auth
   port: 8081
   prefix: auth
 flashcards-service:
-  host: localhost
+  host: server
   port: 8082
   prefix: flashcards
 spring:
@@ -34,3 +34,8 @@ springdoc:
         name: Authorization Service
       - url: /${flashcards-service.prefix}/v3/api-docs
         name: Flashcards Service
+logging:
+  file:
+    name: /var/log/app.log
+  level:
+    root: INFO

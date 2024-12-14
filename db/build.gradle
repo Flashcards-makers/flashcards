@@ -61,4 +61,4 @@ liquibase {
         }
     }
 }
-tasks.register("prepareKotlinBuildScriptModel"){}
+

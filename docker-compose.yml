@@ -1,0 +1,128 @@
+version: '3.9'
+networks:
+  flashcards:
+    driver: bridge
+
+services:
+  postgres_db:
+    image: postgres:${POSTGRES_VERSION:-latest}
+    container_name: postgres_db
+    environment:
+      - "POSTGRES_USER=postgres"
+      - "POSTGRES_PASSWORD=postgres"
+      - "POSTGRES_DB=flashcards"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    ports:
+      - '5432:5432'
+    volumes:
+      - "./containers-data/postgres_db/db-1/data:/var/lib/postgresql/data/:z"
+    networks:
+      - flashcards
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: 'rabbitmq'
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+      - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+    networks:
+      - flashcards
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: server
+    depends_on:
+      postgres_db:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    networks:
+      - flashcards
+  auth:
+    build:
+      context: ./auth
+      dockerfile: Dockerfile
+    container_name: auth
+    depends_on:
+      postgres_db:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    networks:
+      - flashcards
+  mail:
+    build:
+      context: ./mail
+      dockerfile: Dockerfile
+    container_name: mail
+    depends_on:
+      postgres_db:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    networks:
+      - flashcards
+  gateway:
+    build:
+      context: ./gateway
+      dockerfile: Dockerfile
+    container_name: gateway
+    depends_on:
+      server:
+        condition: service_started
+      auth:
+        condition: service_started
+    ports:
+      - '8080:8080'
+    networks:
+      - flashcards
+    healthcheck:
+      test: ["CMD-SHELL", "tail -n 100 /var/log/app.log | grep -q 'Started Application in' || exit 1"]
+      interval: 10s
+      retries: 5
+      timeout: 5s
+    restart: always
+  db:
+    build:
+      context: ./db
+      dockerfile: Dockerfile
+    container_name: liquibase
+    networks:
+      - flashcards
+    depends_on:
+      postgres_db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "grep 'successfully' /app/migration-status.txt"]
+      interval: 2s
+      retries: 30
+      timeout: 5s
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: client
+    depends_on:
+      server:
+        condition: service_started
+      auth:
+        condition: service_started
+      gateway:
+        condition: service_started
+    ports:
+      - '4200:4200'
+    networks:
+      - flashcards
