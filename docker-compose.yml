@@ -89,11 +89,6 @@ services:
       - '8080:8080'
     networks:
       - flashcards
-    healthcheck:
-      test: ["CMD-SHELL", "tail -n 100 /var/log/app.log | grep -q 'Started Application in' || exit 1"]
-      interval: 10s
-      retries: 5
-      timeout: 5s
     restart: always
   db:
     build:
