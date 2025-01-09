@@ -26,7 +26,7 @@ COPY --from=build-stage /app/dist/client /usr/share/nginx/html
 # COPY nginx.conf /etc/nginx/nginx.conf
 
 # Expose the port on which nginx will serve the application
-EXPOSE 80
+EXPOSE 4200
 
 # Start nginx
 CMD ["nginx", "-g", "daemon off;"]

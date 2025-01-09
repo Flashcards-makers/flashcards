@@ -1,3 +1,9 @@
+<app-header
+  [title]="'Flashcards'"
+  [showSearch]="true"
+  [showLogout]="true"
+></app-header>
+
 <div class="add-flashcard-container">
   <h2>Add a New Flashcard</h2>
   <form [formGroup]="flashcardForm" (ngSubmit)="onSubmit()">
@@ -10,7 +16,12 @@
         placeholder="Enter flashcard name"
         required
       />
-      <div *ngIf="flashcardForm.get('name')?.invalid && flashcardForm.get('name')?.touched">
+      <div
+        *ngIf="
+          flashcardForm.get('name')?.invalid &&
+          flashcardForm.get('name')?.touched
+        "
+      >
         Name is required.
       </div>
     </div>
@@ -22,11 +33,18 @@
         placeholder="Enter flashcard description"
         required
       ></textarea>
-      <div *ngIf="flashcardForm.get('description')?.invalid && flashcardForm.get('description')?.touched">
+      <div
+        *ngIf="
+          flashcardForm.get('description')?.invalid &&
+          flashcardForm.get('description')?.touched
+        "
+      >
         Description is required.
       </div>
     </div>
-    <button type="submit" [disabled]="flashcardForm.invalid">Add Flashcard</button>
+    <button type="submit" [disabled]="flashcardForm.invalid">
+      Add Flashcard
+    </button>
   </form>
   <div *ngIf="successMessage" class="success-message">
     Flashcard added successfully!

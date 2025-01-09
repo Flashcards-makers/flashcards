@@ -8,7 +8,7 @@ import { FlashcardsEntity } from '../../../types/Flashcard';
   providedIn: 'root',
 })
 export class FlashcardService {
-  private baseUrl = 'http://localhost:8080';
+  private baseUrl = 'http://localhost:8082';
 
   constructor(private http: HttpClient) {}
 
@@ -16,7 +16,7 @@ export class FlashcardService {
     name: string;
     description: string;
   }): Observable<unknown> {
-    return this.http.post(`${this.baseUrl}/flashcard`, flashcard);
+    return this.http.post(`${this.baseUrl}/flashcards`, flashcard);
   }
 
   getFlashcardById(id: string): Observable<FlashcardsEntity> {
