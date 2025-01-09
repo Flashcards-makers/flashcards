@@ -9,8 +9,10 @@ import { CoreModule } from './modules/core/core.module';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthModule } from './modules/auth/auth.module';
 import { authReducer } from './modules/auth/store/auth.reducer';
+import { flashcardReducer } from './modules/core/store/flashcard.reducer';
 import { AuthEffects } from './modules/auth/store/auth.effects';
 import { DashboardModule } from './modules/core/components/dashboard.module';
+import { FlashcardsEffects } from './modules/core/store/flashcard.effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,8 +23,8 @@ import { DashboardModule } from './modules/core/components/dashboard.module';
     AuthModule,
     DashboardModule,
     BrowserAnimationsModule,
-    StoreModule.forRoot({ auth: authReducer }),
-    EffectsModule.forRoot([AuthEffects]),
+    StoreModule.forRoot({ auth: authReducer, flashcard: flashcardReducer }),
+    EffectsModule.forRoot([AuthEffects, FlashcardsEffects]),
   ],
   providers: [],
   bootstrap: [AppComponent],

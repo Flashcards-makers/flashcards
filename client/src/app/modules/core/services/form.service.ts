@@ -1,22 +1,48 @@
 import { Injectable } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { LoginForm } from '../models/login.form.model';
 import { RegisterForm } from '../models/register.form.model';
 import { PasswordRecoveryForm } from '../models/password.recovery.form.model';
 import { PasswordsForm } from '../models/passwords.form.model';
 import { equivalentValidator } from '../../shared/validators/equivalent.validator';
+import { AddFlashcardsForm, Page } from '../models/flashcard.form.model';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class FormService {
   initPasswordRecoveryForm(): FormGroup<PasswordRecoveryForm> {
     return new FormGroup({
       email: new FormControl('', {
         validators: [Validators.required, Validators.email],
-        nonNullable: true,
-      }),
+        nonNullable: true
+      })
     });
+  }
+
+  initAddFlashcardForm(): FormGroup {
+    return new FormGroup(
+      {
+        name: new FormControl('', {
+          validators: [Validators.required, Validators.minLength(4)],
+          nonNullable: true
+        }),
+        description: new FormControl('', {
+          validators: [Validators.required],
+          nonNullable: true
+        }),
+        icon: new FormControl('', {
+          validators: [Validators.required],
+          nonNullable: true
+        }),
+        isPublic: new FormControl(true, {
+          validators: [Validators.required],
+          nonNullable: true
+        }),
+        pages: new FormArray<FormGroup<Page>>([])
+
+  }
+    );
   }
 
   initPasswordsForm(): FormGroup<PasswordsForm> {
@@ -24,14 +50,14 @@ export class FormService {
       {
         password: new FormControl('', {
           validators: [Validators.required, Validators.minLength(4)],
-          nonNullable: true,
+          nonNullable: true
         }),
         retypePassword: new FormControl('', {
           validators: [Validators.required],
-          nonNullable: true,
-        }),
+          nonNullable: true
+        })
       },
-      { validators: [equivalentValidator('password', 'retypePassword')] },
+      { validators: [equivalentValidator('password', 'retypePassword')] }
     );
   }
 
@@ -39,12 +65,12 @@ export class FormService {
     return new FormGroup({
       email: new FormControl('', {
         validators: [Validators.required, Validators.email],
-        nonNullable: true,
+        nonNullable: true
       }),
       password: new FormControl('', {
         validators: [Validators.required],
-        nonNullable: true,
-      }),
+        nonNullable: true
+      })
     });
   }
 
@@ -55,40 +81,40 @@ export class FormService {
           validators: [
             Validators.required,
             Validators.minLength(2),
-            Validators.maxLength(50),
+            Validators.maxLength(50)
           ],
-          nonNullable: true,
+          nonNullable: true
         }),
         surname: new FormControl('', {
           validators: [
             Validators.required,
             Validators.minLength(2),
-            Validators.maxLength(50),
+            Validators.maxLength(50)
           ],
-          nonNullable: true,
+          nonNullable: true
         }),
         userName: new FormControl('', {
           validators: [
             Validators.required,
             Validators.minLength(4),
-            Validators.maxLength(50),
+            Validators.maxLength(50)
           ],
-          nonNullable: true,
+          nonNullable: true
         }),
         email: new FormControl('', {
           validators: [Validators.required, Validators.email],
-          nonNullable: true,
+          nonNullable: true
         }),
         password: new FormControl('', {
           validators: [Validators.required, Validators.minLength(4)],
-          nonNullable: true,
+          nonNullable: true
         }),
         retypePassword: new FormControl('', {
           validators: [Validators.required],
-          nonNullable: true,
-        }),
+          nonNullable: true
+        })
       },
-      { validators: [equivalentValidator('password', 'retypePassword')] },
+      { validators: [equivalentValidator('password', 'retypePassword')] }
     );
   }
 

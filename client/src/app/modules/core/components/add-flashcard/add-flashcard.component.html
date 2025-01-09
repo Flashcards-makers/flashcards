@@ -5,51 +5,72 @@
 ></app-header>
 
 <div class="add-flashcard-container">
-  <h2>Add a New Flashcard</h2>
   <form [formGroup]="flashcardForm" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <label for="name">Name:</label>
-      <input
-        id="name"
-        type="text"
-        formControlName="name"
-        placeholder="Enter flashcard name"
-        required
-      />
-      <div
-        *ngIf="
-          flashcardForm.get('name')?.invalid &&
-          flashcardForm.get('name')?.touched
-        "
-      >
-        Name is required.
+    <div class="form-input">
+      <mat-form-field appearance="fill">
+        <mat-label>Name</mat-label>
+        <input matInput [formControl]="controls.name" />
+        <mat-error *ngIf="controls.name.invalid">{{
+            getErrorMessage(controls.name)
+          }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-input">
+      <mat-form-field appearance="fill">
+        <mat-label>Description</mat-label>
+        <input type="text" matInput [formControl]="controls.description" />
+        <mat-error *ngIf="controls.description.invalid">{{
+            getErrorMessage(controls.description)
+          }}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-input">
+        <mat-label>Icon</mat-label>
+        <input type="file" (change)="onFileChange($event, 0, 'icon')" [formControl]="controls.icon" />
+        <mat-error *ngIf="controls.icon.invalid">{{
+            getErrorMessage(controls.icon)
+          }}</mat-error>
+    </div>
+
+    <div formArrayName="pages">
+      <div *ngFor="let page of pages.controls; let i = index" [formGroupName]="i">
+        <div class="form-input">
+          <mat-form-field appearance="fill">
+            <mat-label>Question</mat-label>
+            <input matInput formControlName="question" />
+          </mat-form-field>
+        </div>
+
+        <div class="form-input">
+            <mat-label>Question Image</mat-label>
+            <input type="file" (change)="onFileChange($event, i, 'questionImage')" />
+        </div>
+
+        <div class="form-input">
+          <mat-form-field appearance="fill">
+            <mat-label>Answer</mat-label>
+            <input matInput formControlName="answer" />
+          </mat-form-field>
+        </div>
+
+        <div class="form-input">
+            <mat-label>Answer Image</mat-label>
+            <input type="file" (change)="onFileChange($event, i, 'answerImage')" />
+        </div>
+
+        <button type="button" mat-button (click)="removePage(i)">Remove Page</button>
       </div>
     </div>
-    <div class="form-group">
-      <label for="description">Description:</label>
-      <textarea
-        id="description"
-        formControlName="description"
-        placeholder="Enter flashcard description"
-        required
-      ></textarea>
-      <div
-        *ngIf="
-          flashcardForm.get('description')?.invalid &&
-          flashcardForm.get('description')?.touched
-        "
-      >
-        Description is required.
-      </div>
+
+    <button type="button" mat-button (click)="addPage()">Add Page</button>
+    <button type="submit" mat-button [disabled]="flashcardForm.invalid">Save</button>
+    <div
+      class="alert alert-warning alert-dismissible fade show mt-2"
+      role="alert"
+      *ngIf="errorMessage$ | async as error"
+    >
+      {{ error }}
     </div>
-    <button type="submit" [disabled]="flashcardForm.invalid">
-      Add Flashcard
-    </button>
+    <div class="mt-2" *ngIf="loading$ | async">Loading</div>
   </form>
-  <div *ngIf="successMessage" class="success-message">
-    Flashcard added successfully!
-  </div>
-  <div *ngIf="errorMessage" class="error-message">
-    {{ errorMessage }}
-  </div>
 </div>

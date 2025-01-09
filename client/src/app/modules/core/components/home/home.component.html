@@ -1,14 +1,15 @@
 <app-header [title]="'Flashcards'" [showSearch]="true" [showLogout]="true"></app-header>
-
+<app-search (search)="onSearch($event)"/>
 <div class="container">
   <div class="content">
     <div class="tile-container" *ngIf="flashcardsList && flashcardsList.length > 0">
       <div class="tile" *ngFor="let flashcard of flashcardsList">
-        <img src='{{flashcard.icon}}' alt='Icon'>
-        <h2>{{flashcard.name}}</h2>
-        <p>{{ flashcard.description }}</p>
+        <a [routerLink]="['/flashcards/page', flashcard.id]">
+          <img src='{{flashcard.icon}}' alt='Icon'>
+          <h2>{{ flashcard.name }}</h2>
+          <p>{{ flashcard.description }}</p>
+        </a>
       </div>
     </div>
   </div>
-  <app-search/>
 </div>

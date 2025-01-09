@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FlashcardService } from '../../../auth/services/flashcard.service';
+import { FlashcardService } from '../../services/flashcard.service';
 
 @Component({
   selector: 'app-flashcard-detail',

@@ -9,6 +9,7 @@ import { SearchComponent } from './search/search.component';
 import { FormsModule } from '@angular/forms';
 import { FlashcardDetailComponent } from './flashcard-detail/flashcard-detail.component';
 import { AddFlashcardComponent } from './add-flashcard/add-flashcard.component';
+import { ResolvePageComponent } from './resolve.page/resolve.page.component';
 
 @NgModule({
   declarations: [
@@ -16,8 +17,9 @@ import { AddFlashcardComponent } from './add-flashcard/add-flashcard.component';
     HeaderComponent,
     SearchComponent,
     FlashcardDetailComponent,
-    AddFlashcardComponent,
+    ResolvePageComponent,
+    AddFlashcardComponent
   ],
-  imports: [SharedModule, DashboardRoutingModule, CoreModule, FormsModule],
+  imports: [SharedModule, DashboardRoutingModule, CoreModule, FormsModule]
 })
 export class DashboardModule {}

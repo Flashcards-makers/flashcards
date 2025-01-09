@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { FlashcardsEntity } from '../../../../types/Flashcard';
 
 @Component({
   selector: 'app-search',
@@ -9,24 +8,12 @@ import { FlashcardsEntity } from '../../../../types/Flashcard';
 })
 export class SearchComponent {
   searchQuery: string = '';
-  flashcards: FlashcardsEntity[] = [];
+  @Output() search = new EventEmitter<string>();
 
   constructor(private http: HttpClient) {}
 
   onSearch(): void {
-    if (this.searchQuery.trim()) {
-      this.http
-        .get<FlashcardsEntity[]>(`/api/list`, {
-          params: { name: this.searchQuery },
-        })
-        .subscribe({
-          next: (data) => {
-            this.flashcards = data;
-          },
-          error: (err) => {
-            console.error('Error while searching:', err);
-          },
-        });
-    }
+    console.log(`Search query: ${this.searchQuery}`)
+    this.search.emit(this.searchQuery.trim());
   }
 }

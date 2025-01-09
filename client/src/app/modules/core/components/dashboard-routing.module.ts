@@ -3,13 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { AddFlashcardComponent } from './add-flashcard/add-flashcard.component';
 import { FlashcardDetailComponent } from './flashcard-detail/flashcard-detail.component';
+import { ResolvePageComponent } from './resolve.page/resolve.page.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'add-flashcard', component: AddFlashcardComponent },
   {
-    path: 'flashcard/:id',
-    component: FlashcardDetailComponent,
+    path: 'page/:id',
+    component: ResolvePageComponent,
   },
 ];
 

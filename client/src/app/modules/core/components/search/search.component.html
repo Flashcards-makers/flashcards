@@ -1,22 +1,13 @@
 <div class="search-container">
   <form (ngSubmit)="onSearch()">
-    <input 
-      type="text" 
-      name="searchQuery" 
-      placeholder="Enter phrase" 
-      required 
-      [(ngModel)]="searchQuery" 
+    <input
+      type="text"
+      name="searchQuery"
+      placeholder="Search"
+      required
+      [(ngModel)]="searchQuery"
+      (input)="onSearch()"
     />
-    <button type="submit">Search</button>
+    <button (click)="onSearch()">Search</button>
   </form>
-  <div *ngIf="flashcards.length > 0">
-    <h3>Search Results:</h3>
-    <ul>
-      <li *ngFor="let flashcard of flashcards">
-       <a [routerLink]="'/flashcard/' + flashcard.id">
-  {{ flashcard.name }}
-</a>
-      </li>
-    </ul>
-  </div>
 </div>
