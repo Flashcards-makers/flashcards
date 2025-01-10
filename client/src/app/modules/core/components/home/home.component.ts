@@ -30,6 +30,7 @@ export class HomeComponent implements OnInit {
       });
   }
 
+
   onSearch(searchQuery: string): void {
     console.log(`onSearch method in home.component invoked with searchQuery: ${searchQuery}`)
     if (searchQuery) {
@@ -41,6 +42,20 @@ export class HomeComponent implements OnInit {
       const params = new HttpParams().set('name', this.searchQuery.trim());
       this.http.get<FlashcardsListResponse[]>(`${this.apiUrl}/list`, {
           headers,params
+        })
+        .subscribe((data) => {
+          this.flashcardsList = data;
+        });
+    }
+    else {
+      const headers = new HttpHeaders({
+        Authorization: '' + localStorage.getItem('JWT_TOKEN'),
+        'Content-Type': 'application/json',
+      });
+
+      this.http
+        .get<FlashcardsListResponse[]>(`${this.apiUrl}/list`, {
+          headers,
         })
         .subscribe((data) => {
           this.flashcardsList = data;

@@ -8,7 +8,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../../../../store/app.reducer';
 import { Observable } from 'rxjs';
 import { selectFlashcardError, selectFlashcardLoading } from '../../store/flashcard.selectors';
-import { AddFlashcardsData, Page } from '../../models/flashcard.model';
+import { AddFlashcardsData } from '../../models/flashcard.model';
 
 @Component({
   selector: 'app-add-flashcard',
@@ -63,6 +63,20 @@ export class AddFlashcardComponent {
     this.store.dispatch(FlashcardActions.clearError());
   }
 
+  onMainFileChange(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const file = input.files ? input.files[0] : null;
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const base64Image = reader.result as string;
+        (this.flashcardForm.get('icon') as FormControl)
+          .setValue(base64Image);
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
   onFileChange(event: Event, index: number, field: string): void {
     const input = event.target as HTMLInputElement;
     const file = input.files ? input.files[0] : null;
@@ -77,6 +91,7 @@ export class AddFlashcardComponent {
       reader.readAsDataURL(file);
     }
   }
+
   get pages(): FormArray {
     return this.flashcardForm.get('pages') as FormArray;
   }
