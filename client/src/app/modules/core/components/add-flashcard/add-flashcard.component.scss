@@ -43,3 +43,45 @@ button:disabled {
   color: red;
   margin-top: 1rem;
 }
+
+
+@media (max-width: 768px) {
+  .add-flashcard-container {
+    max-width: 100%; 
+    padding: 10px; 
+  }
+
+  input,
+  textarea {
+    padding: 0.4rem; 
+    font-size: 0.9rem; 
+  }
+
+  button {
+    padding: 0.4rem 0.8rem; 
+    font-size: 0.9rem; 
+  }
+
+  .success-message,
+  .error-message {
+    font-size: 0.9rem; 
+  }
+}
+
+@media (max-width: 480px) {
+  input,
+  textarea {
+    font-size: 0.8rem; 
+    padding: 0.3rem; 
+  }
+
+  button {
+    font-size: 0.8rem; 
+    padding: 0.3rem 0.6rem; 
+  }
+
+  .success-message,
+  .error-message {
+    font-size: 0.8rem; 
+  }
+}

@@ -6,26 +6,26 @@
   border-radius: 8px;
   background-color: #f9f9f9;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
 
-  .flashcard-title {
-    margin-bottom: 15px;
-    font-size: 24px;
-    font-weight: bold;
-    color: #333;
-    text-align: center;
-  }
+.flashcard-details-container .flashcard-title {
+  margin-bottom: 15px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+}
 
-  .flashcard-info {
-    margin: 10px 0;
-    font-size: 18px;
-    color: #555;
+.flashcard-details-container .flashcard-info {
+  margin: 10px 0;
+  font-size: 18px;
+  color: #555;
+}
 
-    .flashcard-name,
-    .flashcard-description {
-      font-weight: bold;
-      color: #007bff;
-    }
-  }
+.flashcard-details-container .flashcard-info .flashcard-name,
+.flashcard-details-container .flashcard-info .flashcard-description {
+  font-weight: bold;
+  color: #007bff;
 }
 
 .loading-message {
@@ -34,4 +34,49 @@
   font-style: italic;
   color: #888;
   padding: 20px;
+}
+
+
+@media (max-width: 768px) {
+  .flashcard-details-container {
+    padding: 15px; 
+    max-width: 100%; 
+  }
+
+  .flashcard-details-container .flashcard-title {
+    font-size: 20px; 
+    margin-bottom: 10px;
+  }
+
+  .flashcard-details-container .flashcard-info {
+    font-size: 16px; 
+  }
+
+  .flashcard-details-container .flashcard-info .flashcard-name,
+  .flashcard-details-container .flashcard-info .flashcard-description {
+    font-size: 16px; 
+  }
+
+  .loading-message {
+    font-size: 16px; 
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .flashcard-details-container {
+    padding: 10px; 
+  }
+
+  .flashcard-details-container .flashcard-title {
+    font-size: 18px; 
+  }
+
+  .flashcard-details-container .flashcard-info {
+    font-size: 14px; 
+  }
+
+  .loading-message {
+    font-size: 14px;
+  }
 }
