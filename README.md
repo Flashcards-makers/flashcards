@@ -30,9 +30,11 @@ Flashcards is an application for creating and solving flashcards. It features a 
 - **auth**:  
   This is a service that deals with user authorization and registration, after correct registration sends a message to the queue to send an email through the mail service
 
+- **gateway**
+  This service allow to connect to multiple instances of other services
 ## Getting Started
 
-1. Start PostgreSQL and RabbitMQ with Docker Compose:
+1. Start PostgreSQL and RabbitMQ with Docker Compose under directory /infrastructure:
    ```bash
    docker-compose up
    ```
@@ -61,6 +63,18 @@ Flashcards is an application for creating and solving flashcards. It features a 
    ng serve
    ```
 8. Access the application at `http://localhost:4200/`.
+
+## Docker compose
+Project is fully configured tu run under docker environment. You can run automatically all services in few steps.
+1. Build application: 
+    ```bash
+    gradle build
+   ```
+2. Start all services
+   ```bash
+   docker-compose up --build
+   ```
+3. Access the application at `http://localhost:4200/`.
 
 ## Database
 
