@@ -21,9 +21,9 @@ class PagesSpecification extends BaseSpecification {
     private WebTestClient webTestClient
 
     @Autowired
-    private FlashcardsService flashcardsService;
+    private FlashcardsService flashcardsService
 
-    private TestExecutionListener reactorContextTestExecutionListener = new ReactorContextTestExecutionListener();
+    private TestExecutionListener reactorContextTestExecutionListener = new ReactorContextTestExecutionListener()
 
     private void saveFlashcards() {
         UserInfoUserDetails userDetails = new UserInfoUserDetails(user)
